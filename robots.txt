@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Static, client-side app. No private routes, no server data.

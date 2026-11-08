@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ZTC AI Studio">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#120a0d"/>
+      <stop offset="1" stop-color="#1b0d13"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6b82"/>
+      <stop offset="0.55" stop-color="#ff2d4f"/>
+      <stop offset="1" stop-color="#8be9ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <path d="M256 60 440 166v180L256 452 72 346V166z" fill="none" stroke="url(#stroke)" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M176 186h160L176 326h160" fill="none" stroke="#ff6b82" stroke-width="34" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "name": "ZTC AI Studio",
+  "short_name": "ZTC Studio",
+  "description": "Turn a prompt into a finished video: script, storyboard, AI art, voice-over, music, captions and MP4 export — free providers first, with automatic failover.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "categories": ["video", "productivity", "graphics"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

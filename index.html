@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self' https://js.puter.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https: blob:; worker-src 'self' blob:; frame-src 'self' blob:; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="ZTC AI Studio — turn a prompt into a finished video: script, storyboard, AI art, voice-over, music, captions and MP4 export, with free-first providers and automatic failover.">
+<title>ZTC AI Studio · Prompt to Video</title>
+<meta name="application-name" content="ZTC AI Studio">
+<meta name="theme-color" content="#07080b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f1f0" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZTC AI Studio">
+<meta property="og:title" content="ZTC AI Studio — prompt to video">
+<meta property="og:description" content="Script, storyboard, AI art, voice-over, music, captions and MP4 export in one browser studio. Free providers first, automatic failover, no keys embedded.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZTC AI Studio — prompt to video">
+<meta name="twitter:description" content="A complete browser video studio: prompt → script → storyboard → art → voice → music → MP4.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="stylesheet" href="styles/studio.css">
+<link rel="stylesheet" href="styles/chat.css">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<script defer src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div id="app">
+  <aside id="rail" aria-label="Workspace navigation">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <span class="ring"></span>
+        <svg viewBox="0 0 40 40" focusable="false"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="#120a0d" stroke="#ff2d4f" stroke-width="1.6"/><path d="M13 14h14l-14 12h14" fill="none" stroke="#ff6b82" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-text"><b>ZTC AI</b><small>studio</small></span>
+      <button class="icon-btn rail-close" id="railClose" aria-label="Close navigation">✕</button>
+    </div>
+
+    <nav class="nav" aria-label="Views">
+      <button class="nav-item on" data-view="studio" aria-current="page">
+        <span class="nav-ico" data-icon="spark"></span><span class="nav-label">Studio</span><kbd>1</kbd>
+      </button>
+      <button class="nav-item" data-view="storyboard">
+        <span class="nav-ico" data-icon="grid"></span><span class="nav-label">Storyboard</span><kbd>2</kbd>
+      </button>
+      <button class="nav-item" data-view="timeline">
+        <span class="nav-ico" data-icon="timeline"></span><span class="nav-label">Timeline</span><kbd>3</kbd>
+      </button>
+      <button class="nav-item" data-view="assets">
+        <span class="nav-ico" data-icon="image"></span><span class="nav-label">Assets</span><kbd>4</kbd>
+      </button>
+      <button class="nav-item" data-view="chat">
+        <span class="nav-ico" data-icon="chat"></span><span class="nav-label">AI Chat</span><kbd>5</kbd>
+      </button>
+    </nav>
+
+    <div class="rail-section">
+      <div class="rail-head">
+        <span>Projects</span>
+        <button class="icon-btn" id="btnNewProject" title="New project" aria-label="New project">+</button>
+      </div>
+      <div class="project-list" id="projectList" role="list"></div>
+    </div>
+
+    <div class="rail-foot">
+      <div class="storage" id="storageMeter" title="Local storage used">
+        <span class="storage-bar"><i></i></span>
+        <small>local only</small>
+      </div>
+      <div class="rail-actions">
+        <button class="icon-btn" id="btnTheme" aria-label="Switch colour theme" title="Toggle dark / light">◐</button>
+        <button class="icon-btn" id="btnSettings" aria-label="Settings" title="Settings">⚙</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="shell">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="btnMenu" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="crumb">
+        <label class="sr-only" for="projectName">Project name</label>
+        <input id="projectName" class="project-name" type="text" spellcheck="false" maxlength="80" autocomplete="off">
+        <span class="version-chip" id="versionChip" hidden></span>
+      </div>
+      <div class="top-pills">
+        <span class="pill" id="statusPill" role="status">Ready</span>
+        <span class="pill ghost" id="providerPill" hidden></span>
+      </div>
+      <div class="top-actions">
+        <button class="btn ghost" id="btnPalette" title="Command palette">Commands <kbd>⌘K</kbd></button>
+        <button class="btn ghost" id="btnHelp" title="Keyboard shortcuts">?</button>
+        <button class="btn primary" id="btnExport">Export</button>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="view" id="view-studio" aria-label="Studio"></section>
+      <section class="view" id="view-storyboard" aria-label="Storyboard" hidden></section>
+      <section class="view" id="view-timeline" aria-label="Timeline" hidden></section>
+      <section class="view" id="view-assets" aria-label="Assets" hidden></section>
+      <section class="view" id="view-chat" aria-label="AI chat" hidden></section>
+    </main>
+
+    <footer class="footer">
+      <span>Powered by <b>Zeynar The Creator</b></span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span id="footNote">free-first providers · no keys embedded</span>
+    </footer>
+  </div>
+</div>
+
+<div id="toaster" class="toaster" aria-live="polite" aria-atomic="false"></div>
+
+<div id="overlay" class="overlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div>
+</div>
+
+<div id="palette" class="palette" hidden>
+  <div class="palette-box" role="dialog" aria-modal="true" aria-label="Command palette">
+    <label class="sr-only" for="paletteInput">Command</label>
+    <input id="paletteInput" type="text" autocomplete="off" spellcheck="false" placeholder="Search commands, projects, scenes…">
+    <div id="paletteList" class="palette-list" role="listbox" aria-label="Results"></div>
+    <div class="palette-foot"><kbd>↑</kbd><kbd>↓</kbd> navigate <kbd>↵</kbd> run <kbd>esc</kbd> close</div>
+  </div>
+</div>
+
+<input type="file" id="fileImage" accept="image/*" multiple hidden>
+<input type="file" id="fileAudio" accept="audio/*" hidden>
+<input type="file" id="fileImport" accept="application/json,.json,.ztc" hidden>
+
+<noscript><div class="noscript">ZTC AI Studio needs JavaScript. Enable it to build and render videos.</div></noscript>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

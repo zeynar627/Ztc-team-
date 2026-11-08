@@ -1,0 +1,29 @@
+{
+  "name": "ztc-studio",
+  "version": "3.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ZTC AI Studio — prompt-to-video production workbench with free-first AI providers, failover, storyboard and timeline editing.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/core.test.mjs",
+    "test:browser": "node tests/browser.test.mjs"
+  },
+  "keywords": [
+    "ai-video",
+    "storyboard",
+    "text-to-speech",
+    "generative-media",
+    "pollinations",
+    "ai-horde"
+  ],
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
