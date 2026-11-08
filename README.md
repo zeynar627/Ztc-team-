@@ -1,5 +1,7 @@
 # ZTC AI Studio
 
+**Live:** https://zeynar627.github.io/Ztc-team-/ · **Repository:** https://github.com/zeynar627/Ztc-team-
+
 **Prompt → script → storyboard → AI art → voice-over → music → captions → video.**  
 A build-ready, single-page production studio that runs entirely in the browser. Free providers first, automatic failover, no secret keys, no backend required.
 
